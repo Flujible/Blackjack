@@ -1,12 +1,18 @@
 window.onload = () => {
+  let deckId;
   get('https://deckofcardsapi.com/api/deck/new/shuffle/').then((deckInfo) => {
     let res = JSON.parse(deckInfo);
-    return res.deck_id;
-  }).then((deckId) => {
-    document.getElementById("shuffleButton").onClick = shuffleDeck(deckId, 1);
-    
-  });
 
+    /* This does assing the ID to the variable, but because of the asynchronous
+    nature, I cant guarnatee that I will be able to access the deckID outside
+    the promise chain */
+    // deckId = res.deck_id;
+
+    return res.deck_id;
+  })
+
+  //I need the deck ID here so the API knows which deck to shuffle
+  document.getElementById("drawButton").onClick = drawCard(deckId, 1);
 }
 
 let shuffleDeck = (deckId) => {
