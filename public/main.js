@@ -1,59 +1,48 @@
-window.onload = () => {
-  let deckId = 'new';
+let apiUrl = 'https://deckofcardsapi.com/api/';
 
-  fetch('https://deckofcardsapi.com/api/deck/'+ deckId + '/shuffle/').then((response) => {
-    console.log(response.json());
-  });
+let deck = new BlackjackDeck();
 
+function BlackjackDeck() {
+  this.deckId = 'new';
+  this.cardsRemaining = null;
+  this.lastDrawnCard = null;
+
+  this.shuffle = () => {
+    fetch(apiUrl + 'deck/' + this.deckId + '/shuffle/')
+      .then(status)
+      .then(json)
+      .then((data) => {
+        this.deckId = data.deck_id;
+        this.cardsRemaining = data.remaining;
+        console.log(data.deck_id);
+      }).catch((err) => {
+        console.log('Request failed', err);
+      });
+  }
+
+  this.drawCard = (drawNo) => {
+    fetch(apiUrl + 'deck/' + this.deckId + '/draw/?count=' + drawNo)
+      .then(status)
+      .then(json)
+      .then((data) => {
+        this.lastDrawnCard = data.cards[0].code;;
+      }).catch((err) => {
+        console.log('Request failed', err);
+      });
+  }
 }
 
 
+let status = (response) => {
+  if (response.status <= 200 && response.status < 300) {
+    return Promise.resolve(response);
+  } else {
+    return Promise.reject(new Error(response.statusText));
+  }
+}
 
-/* Commenting out until I can understand the viability of fetch()*/
+let json = (response) => {
+  return response.json();
+}
 
-//I need the deck ID here so the API knows which deck to shuffle
-// document.getElementById("drawButton").onClick = drawCard(deckId, 1);
-
-// let shuffleDeck = (deckId) => {
-//   if (deckId) {
-//     return get('https://deckofcardsapi.com/api/deck/'+deckId+'/shuffle/');
-//   } else {
-//     return get('https://deckofcardsapi.com/api/deck/new/shuffle/');
-//   }
-// }
-//
-// let drawCard = (deckId, drawCount) => {
-//   return get('https://deckofcardsapi.com/api/deck/'+deckId+'/draw/?count='+drawCount);
-// }
-
-// get('https://deckofcardsapi.com/api/deck/new/shuffle/').then((deckInfo) => {
-//   let res = JSON.parse(deckInfo);
-//
-//   /* This does assing the ID to the variable, but because of the asynchronous
-//   nature, I cant guarnatee that I will be able to access the deckID outside
-//   the promise chain */
-//   // deckId = res.deck_id;
-//
-//   return res.deck_id;
-// })
-
-// let get = (url) => {
-//   return new Promise((resolve, reject) => {
-//     let req = new XMLHttpRequest();
-//     req.open('GET', url);
-//
-//     req.onload = () => {
-//       if(req.status = 200) {
-//         resolve(req.response);
-//       } else {
-//         reject(Error(req.statusText));
-//       }
-//     }
-//
-//     req.onerror = () => {
-//       reject(Error("Network Error"));
-//     }
-//
-//     req.send();
-//   });
-// }
+deck.shuffle();
