@@ -20,4 +20,5 @@ deck.shuffle();
 
 window.onload = () => {
   document.getElementById('drawButton').onclick = () => deck.drawSingleCard();
+  document.getElementById('shuffleButton').onclick = () => deck.shuffle();
 }
