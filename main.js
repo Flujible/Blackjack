@@ -17,3 +17,7 @@ let json = (response) => {
 }
 
 deck.shuffle();
+
+window.onload = () => {
+  document.getElementById('drawButton').onclick = () => deck.drawSingleCard();
+}
