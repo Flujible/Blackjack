@@ -1,0 +1,24 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "description": "Basic blackjack game for js practice",
+  "main": "main.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flujible/Blackjack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Flujible/Blackjack/issues"
+  },
+  "homepage": "https://github.com/Flujible/Blackjack#readme",
+  "dependencies": {
+    "npm": "^6.0.0",
+    "parcel-bundler": "^1.7.1"
+  }
+}
