@@ -18,7 +18,14 @@ export default class BlackjackDeckES6Class {
       });
   }
 
-  drawCard() {
-
+  drawSingleCard() {
+    fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
+      .then(response => response.json())
+      .then((data) => {
+        this.lastDrawnCard = data.cards[0].code;;
+        document.createTextNode(this.lastDrawnCard);
+      }).catch((err) => {
+        console.log('Request failed', err);
+      });
   }
 }
