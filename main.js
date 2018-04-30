@@ -1,4 +1,5 @@
 import BlackjackDeckES6Class from './BlackjackDeck.js';
+import BlackjackPlayer from './BlackjackPlayer.js'
 
 let apiUrl = 'https://deckofcardsapi.com/api/';
 
