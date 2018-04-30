@@ -22,8 +22,8 @@ export default class BlackjackDeckES6Class {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
-        this.lastDrawnCard = data.cards[0].code;;
-        document.createTextNode(this.lastDrawnCard);
+        this.lastDrawnCard = data.cards[0].code;
+        document.getElementById('card').innerText = "Card: " + this.lastDrawnCard;
       }).catch((err) => {
         console.log('Request failed', err);
       });
