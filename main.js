@@ -1,12 +1,4 @@
-import BlackjackDeck, { BlackjackDeckES6Class } from './BlackjackDeck.js';
-
-// // TODO:
-/*
-Initiate npm (npm init)
-Add Parcel
-Use a ES6 CLass for BlackjackDeck
-npm start -> parcel index.html
-*/
+import BlackjackDeckES6Class from './BlackjackDeck.js';
 
 let apiUrl = 'https://deckofcardsapi.com/api/';
 
