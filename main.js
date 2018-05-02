@@ -20,6 +20,7 @@ let json = (response) => {
 deck.shuffle();
 
 window.onload = () => {
-  document.getElementById('drawButton').onclick = () => deck.drawSingleCard();
+  console.log('hello');
+  document.getElementById('drawButton').onclick = () => deck.dealCard(player);
   document.getElementById('shuffleButton').onclick = () => deck.shuffle();
 }
