@@ -1,9 +1,10 @@
-import BlackjackDeckES6Class from './BlackjackDeck.js';
+import BlackjackDeck from './BlackjackDeck.js';
 import BlackjackPlayer from './BlackjackPlayer.js'
 
 let apiUrl = 'https://deckofcardsapi.com/api/';
 
 let deck = new BlackjackDeckES6Class(apiUrl);
+let player = new BlackjackPlayer();
 
 let status = (response) => {
   if (response.status <= 200 && response.status < 300) {
