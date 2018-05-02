@@ -1,4 +1,4 @@
-export default class BlackjackDeckES6Class {
+export default class BlackjackDeck {
   constructor(apiUrl) {
     this.deckId = 'new';
     this.cardsRemaining = null;
