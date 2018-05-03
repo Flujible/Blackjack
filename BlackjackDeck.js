@@ -22,7 +22,6 @@ export default class BlackjackDeck {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
-        console.log('ping');
         this.lastDrawnCard = data.cards[0].code;
         document.getElementById('card').innerText = "Card: " + this.lastDrawnCard;
         player.addCardToHand(this.lastDrawnCard);

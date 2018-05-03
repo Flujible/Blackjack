@@ -21,7 +21,6 @@ let json = (response) => {
 deck.shuffle();
 
 window.onload = () => {
-  console.log('hello');
   document.getElementById('drawButton').onclick = () => deck.dealCard(player);
   document.getElementById('shuffleButton').onclick = () => deck.shuffle();
 }
