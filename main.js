@@ -3,7 +3,7 @@ import BlackjackPlayer from './BlackjackPlayer.js'
 
 let apiUrl = 'https://deckofcardsapi.com/api/';
 
-let deck = new BlackjackDeckES6Class(apiUrl);
+let deck = new BlackjackDeck(apiUrl);
 let player = new BlackjackPlayer();
 
 let status = (response) => {
