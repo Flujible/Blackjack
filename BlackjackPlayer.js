@@ -3,7 +3,9 @@ export default class BlackjackPlayer {
  // TODO dealer: shuffle deck, hand, handTotal, request cards, stands, isDealer flag
 
  constructor() {
-   let hand = [];
+   this.hand = [];
+   this.handTotal = 0;
+   this.bust = false;
  }
 
  addCardToHand(card) {
