@@ -4,40 +4,36 @@ export default class BlackjackPlayer {
 
  constructor() {
    this.hand = [];
-   this.handTotal = 0;
+   this.handTotals = [0];
    this.bust = false;
+   this.win = false;
  }
 
  addCardToHand(card) {
-    this.hand.push(card);
-    this.handTotal = this.calculateHandTotal();
- }
-
- calculateHandTotal() {
-   let total = 0;
-   for (let card of this.hand) {
-     total += this.evaluate(card);
+   //If the card is an ace, duplicate the array of totals and add 1 to the original
+   //array and add 11 to the duplicated, add values if they dont already exist
+   if(card.value === 'ACE') {
+     let duplicateHandTotals = this.handTotals;
+     for (let total of this.handTotals) {
+       total += 1;
+       console.log(total);
+     }
+     for (let total of duplicateHandTotals) {
+       total += 11;
+       console.log(total);
+       if (!this.handTotals.includes(total)) this.handTotals.push(total);
+     }
+   } else if (['JACK', 'QUEEN', 'KING'].includes(card.value)) {
+     for(let total of this.handTotals) {
+       //Face cards are always worth 10;
+       total += 10;
+       console.log(total);
+     }
+   } else {
+     for(let total of this.handTotals) {
+       total += parseInt(card.value);
+       console.log(total);
+     }
    }
-   if (total > 21) {
-     this.bust = true;
-     console.log("bust");
-   }
-   console.log(total);
- }
-
- evaluate(card) {
-   let cardValue = card.value;
-   //Face cards are always worth 10
-   if (['JACK', 'QUEEN', 'KING'].includes(cardValue)) return 10;
-
-   // TODO: Aces can be either 1 or 11 - think how to handle this
-   // Calculate total of all cards except aces
-   // For the each Ace, duplicate the handTotal aray
-   // For each hand total, add 1 to inital array, add 11 to the duplications
-   // Cast a set operator to ensure there is only one of each possible value
-   if (cardValue === 'ACE') return 1;
-
-   //All other cards have self explanatory values
-   return parseInt(cardValue, 10);
  }
 }
