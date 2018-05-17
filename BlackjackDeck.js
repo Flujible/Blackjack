@@ -26,7 +26,7 @@ export default class BlackjackDeck {
       .then((data) => {
         this.lastDrawnCard = data.cards[0].code;
         document.getElementById('card').innerText = "Card: " + this.lastDrawnCard;
-        player.addCardToHand(data.cards[0]);
+        player.hand.push(data.cards[0]);
         console.log(player.handTotals);
         if (player.bust) {
           document.getElementById('drawButton').disabled = true;

@@ -9,29 +9,29 @@ export default class BlackjackPlayer {
   }
 
   get handTotals() {
-    this.hand.sort();
     let handTotals = [0];
+    let aces = 0;
 
     this.hand.map(card => {
-      if (['JACK', 'QUEEN', 'KING'].includes(card.value)) {
-        //Face cards are always worth 10
-        handTotals = handTotals.map(total => total + 10);
-
-      } else if(Number.isInteger(card.value))) {
+      if (Number.isInteger(parseInt(card.value))) {
         const { value } = card;
         const cardValue = parseInt(value, 10);
-
         handTotals = handTotals.map(total => total + cardValue);
+      } else if (['JACK', 'QUEEN', 'KING'].includes(card.value)){
+        //Face cards are always worth 10
+        handTotals = handTotals.map(total => total + 10);
       } else if (card.value === 'ACE'){
+        // Duplicate the hand totals, add 1 to the original and 11 to the
+        // other, dont add duplicates
+        let duplicateTotals = handTotals
         handTotals = handTotals.map(total => total + 1);
-        // TODO:
-        //Calculate these last
-        //Duplicate the current number of hand totals
-        //Add 1 to the original hand totals, add 11 to the duplications
-        //Combine the arrays
-        //Remove the duplicates
+        duplicateTotals.map(total => {
+          if(!(handTotals.includes(total + 11))) {
+            handTotals.push(total + 11);
+          }
+        });
       }
-
-    })
+    });
+    return handTotals;
   }
 }
