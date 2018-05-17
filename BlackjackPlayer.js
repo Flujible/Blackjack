@@ -17,6 +17,7 @@ export default class BlackjackPlayer {
 
   get handTotals() {
     let handTotals = [0];
+    let duplicateTotals;
     let aces = 0;
 
     this.hand.map(card => {
@@ -30,7 +31,7 @@ export default class BlackjackPlayer {
       } else if (card.value === 'ACE'){
         // Duplicate the hand totals, add 1 to the original and 11 to the
         // other, dont add duplicates
-        let duplicateTotals = handTotals
+        duplicateTotals = handTotals
         handTotals = handTotals.map(total => total + 1);
         duplicateTotals.map(total => {
           if(!(handTotals.includes(total + 11))) {
