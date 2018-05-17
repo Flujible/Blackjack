@@ -6,6 +6,13 @@ export default class BlackjackPlayer {
     this.hand = [];
     this.bust = false;
     this.win = false;
+    this.winCount = 0;
+  }
+
+  reset() {
+    this.hand = [];
+    this.bust = false;
+    this.win = false;
   }
 
   get handTotals() {

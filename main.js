@@ -22,5 +22,9 @@ deck.shuffle();
 
 window.onload = () => {
   document.getElementById('drawButton').onclick = () => deck.dealCard(player);
-  document.getElementById('shuffleButton').onclick = () => deck.shuffle();
+  document.getElementById('resetButton').onclick = () => {
+    deck.shuffle();
+    player.reset();
+    document.getElementById('drawButton').disabled = false;
+  }
 }
