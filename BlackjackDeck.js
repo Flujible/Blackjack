@@ -18,6 +18,8 @@ export default class BlackjackDeck {
       });
   }
 
+  // TODO: Rewrite this to push new cards directly to the player's hand and then
+  // call handTotals getter as per comments in player file
   dealCard(player) {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
