@@ -31,9 +31,9 @@ export default class BlackjackPlayer {
       } else if (card.value === 'ACE'){
         // Duplicate the hand totals, add 1 to the original and 11 to the
         // other, dont add duplicates
-        duplicateTotals = handTotals
+        duplicateTotals = handTotals.slice();
         handTotals = handTotals.map(total => total + 1);
-        duplicateTotals.map(total => {
+        duplicateTotals.forEach(total => {
           if(!(handTotals.includes(total + 11))) {
             handTotals.push(total + 11);
           }
