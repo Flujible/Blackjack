@@ -29,9 +29,9 @@ export default class BlackjackDeck {
         // TODO: Make this show the player's entire hand rather than just the first card
         document.getElementById('playerHand').innerText = "Your hand: " + player.hand[0].code;
         console.log(player.handTotals);
-        if (player.bust) {
-          document.getElementById('drawButton').disabled = true;
-        }
+        // if (player.handTotals.every(value => value > 21)) {
+        //   document.getElementById('drawButton').disabled = true;
+        // }
       }).catch((err) => {
         console.log('Request failed', err);
       });

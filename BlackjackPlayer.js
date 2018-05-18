@@ -40,9 +40,6 @@ export default class BlackjackPlayer {
         });
       }
     });
-    if (handTotals.every(value => value > 21)) {
-      this.bust = true;
-    }
     return handTotals;
   }
 }
