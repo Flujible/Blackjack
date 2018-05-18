@@ -25,8 +25,9 @@ export default class BlackjackDeck {
       .then(response => response.json())
       .then((data) => {
         this.lastDrawnCard = data.cards[0].code;
-        document.getElementById('card').innerText = "Card: " + this.lastDrawnCard;
         player.hand.push(data.cards[0]);
+        // TODO: Make this show the player's entire hand rather than just the first card
+        document.getElementById('playerHand').innerText = "Your hand: " + player.hand[0].code;
         console.log(player.handTotals);
         if (player.bust) {
           document.getElementById('drawButton').disabled = true;
