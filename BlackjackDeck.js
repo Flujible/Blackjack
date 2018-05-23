@@ -26,8 +26,24 @@ export default class BlackjackDeck {
       .then((data) => {
         this.lastDrawnCard = data.cards[0].code;
         player.hand.push(data.cards[0]);
-        // TODO: Make this show the player's entire hand rather than just the first card
-        document.getElementById('playerHand').innerText = "Your hand: " + player.hand[0].code;
+        let cards;
+        let totals;
+        player.hand.forEach((card, index) => {
+          if (index === 0) {
+            cards = card.code;
+          } else {
+            cards += ', '+card.code;
+          }
+        });
+        player.handTotals.forEach((total, index) => {
+          if (index === 0) {
+            totals = total;
+          } else if(total <= 21) {
+            totals += ', '+total;
+          }
+        })
+        document.getElementById('playerHand').innerText = "Your hand: " + cards;
+        document.getElementById('playerTotals').innerText = "Your hand totals: " + totals;
         console.log(player.handTotals);
         // if (player.handTotals.every(value => value > 21)) {
         //   document.getElementById('drawButton').disabled = true;
