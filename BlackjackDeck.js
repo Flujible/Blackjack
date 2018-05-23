@@ -45,9 +45,14 @@ export default class BlackjackDeck {
         document.getElementById('playerHand').innerText = "Your hand: " + cards;
         document.getElementById('playerTotals').innerText = "Your hand totals: " + totals;
         console.log(player.handTotals);
-        // if (player.handTotals.every(value => value > 21)) {
-        //   document.getElementById('drawButton').disabled = true;
-        // }
+        if (player.handTotals.every(value => value > 21)) {
+          document.getElementById('drawButton').disabled = true;
+          console.log("Lose");
+        }
+        if (player.handTotals.includes(21)) {
+          document.getElementById('drawButton').disabled = true;
+          console.log("Win");
+        }
       }).catch((err) => {
         console.log('Request failed', err);
       });

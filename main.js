@@ -26,5 +26,7 @@ window.onload = () => {
     deck.shuffle();
     player.reset();
     document.getElementById('drawButton').disabled = false;
+    document.getElementById('playerHand').innerText = "Your hand: ";
+    document.getElementById('playerTotals').innerText = "Your hand totals: ";
   }
 }
