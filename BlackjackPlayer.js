@@ -2,17 +2,25 @@ export default class BlackjackPlayer {
   // TODO player: reset, winCount, stand, request cards, flag: bust,
   // TODO dealer: shuffle deck, hand, handTotal, request cards, stands, isDealer flag
 
-  constructor() {
+  constructor(isDealer) {
     this.hand = [];
     this.bust = false;
     this.win = false;
     this.winCount = 0;
+    this.isDealer = isDealer;
   }
 
   reset() {
     this.hand = [];
     this.bust = false;
-    this.win = false;
+    document.getElementById('drawButton').disabled = false;
+    if(this.isDealer) {
+      document.getElementById('dealerHand').innerText = "Dealer's hand: ";
+      document.getElementById('dealerTotals').innerText = "Dealer's hand totals: ";
+    } else {
+      document.getElementById('playerHand').innerText = "Your hand: ";
+      document.getElementById('playerTotals').innerText = "Your hand totals: ";
+    }
   }
 
   get handTotals() {

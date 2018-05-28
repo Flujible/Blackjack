@@ -47,17 +47,30 @@ export default class BlackjackDeck {
           } else if(total <= 21) {
             totals += ', ' + total;
           }
-        })
-        document.getElementById('playerHand').innerText = "Your hand: " + cards;
-        document.getElementById('playerTotals').innerText = "Your hand totals: " + totals;
+        });
+        if(player.isDealer) {
+          console.log('Dealer');
+          document.getElementById('dealerHand').innerText = "Dealer's hand: " + cards;
+          document.getElementById('dealerTotals').innerText = "Dealer's hand totals: " + totals;
+        } else {
+          console.log('Player');
+          document.getElementById('playerHand').innerText = "Your hand: " + cards;
+          document.getElementById('playerTotals').innerText = "Your hand totals: " + totals;
+        }
+
         console.log(player.handTotals);
         if (player.handTotals.every(value => value > 21)) {
           document.getElementById('drawButton').disabled = true;
           console.log("Lose");
         }
         if (player.handTotals.includes(21)) {
-          document.getElementById('drawButton').disabled = true;
-          console.log("Win");
+          if (player.isDealer) {
+            document.getElementById('drawButton').disabled = true;
+            this.createGameEndMessage("Dealer wins 😭");
+          } else {
+            document.getElementById('drawButton').disabled = true;
+            this.createGameEndMessage("You win! 😄");
+          }
         }
       }).catch((err) => {
         console.log('Request failed', err);

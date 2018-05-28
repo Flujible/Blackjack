@@ -4,7 +4,8 @@ import BlackjackPlayer from './BlackjackPlayer.js'
 let apiUrl = 'https://deckofcardsapi.com/api/';
 
 let deck = new BlackjackDeck(apiUrl);
-let player = new BlackjackPlayer();
+let player = new BlackjackPlayer(false);
+let dealer = new BlackjackPlayer(true);
 
 let status = (response) => {
   if (response.status <= 200 && response.status < 300) {
