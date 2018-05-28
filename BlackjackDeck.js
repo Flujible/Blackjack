@@ -45,7 +45,7 @@ export default class BlackjackDeck {
           if (index === 0) {
             totals = total;
           } else if(total <= 21) {
-            totals += ', '+total;
+            totals += ', ' + total;
           }
         })
         document.getElementById('playerHand').innerText = "Your hand: " + cards;
