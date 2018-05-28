@@ -19,16 +19,17 @@ let json = (response) => {
   return response.json();
 }
 
-deck.shuffle();
-
 window.onload = () => {
   deck.initialDeal(player, dealer);
   document.getElementById('drawButton').onclick = () => deck.dealCard(player);
   document.getElementById('resetButton').onclick = () => {
     deck.shuffle();
     player.reset();
-    document.getElementById('drawButton').disabled = false;
-    document.getElementById('playerHand').innerText = "Your hand: ";
-    document.getElementById('playerTotals').innerText = "Your hand totals: ";
+    dealer.reset();
+    deck.initialDeal(player, dealer);
+    if(document.getElementById('gameEndMessage')) {
+      let message = document.getElementById('gameEndMessage');
+      message.parentNode.removeChild(message);
+    }
   }
 }

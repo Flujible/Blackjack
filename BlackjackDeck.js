@@ -61,7 +61,7 @@ export default class BlackjackDeck {
         console.log(player.handTotals);
         if (player.handTotals.every(value => value > 21)) {
           document.getElementById('drawButton').disabled = true;
-          console.log("Lose");
+          this.createGameEndMessage("You lose 😭");
         }
         if (player.handTotals.includes(21)) {
           if (player.isDealer) {
@@ -75,5 +75,14 @@ export default class BlackjackDeck {
       }).catch((err) => {
         console.log('Request failed', err);
       });
+  }
+
+  createGameEndMessage(innerText) {
+    let gameEndMessage = document.createElement('div');
+    gameEndMessage.id ='gameEndMessage'
+    let newContent = document.createTextNode(innerText);
+    gameEndMessage.appendChild(newContent);
+    let mainContent = document.getElementById('mainContent');
+    mainContent.append(gameEndMessage);
   }
 }
