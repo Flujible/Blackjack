@@ -6,6 +6,14 @@ export default class BlackjackDeck {
     this.apiUrl = apiUrl;
   }
 
+  initialDeal(player, dealer) {
+    this.shuffle();
+    this.dealCard(player);
+    this.dealCard(dealer);
+    this.dealCard(player);
+    this.dealCard(dealer);
+  }
+
   shuffle() {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/shuffle/')
       .then(response => response.json())
