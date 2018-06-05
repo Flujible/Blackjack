@@ -1,6 +1,6 @@
 export default class BlackjackPlayer {
-  // TODO player: reset, winCount, stand, request cards, flag: bust,
-  // TODO dealer: shuffle deck, hand, handTotal, request cards, stands, isDealer flag
+  // TODO player: stand
+  // TODO dealer: auto-play when player stands
 
   constructor(isDealer) {
     this.hand = [];
@@ -49,5 +49,22 @@ export default class BlackjackPlayer {
       }
     });
     return handTotals;
+  }
+
+  dealerPlays() {
+    /**
+    When the dealer has served every player, his face-down card is turned up.
+
+    If the total is 17 or more, he must stand.
+
+    If the total is 16 or under, he must take a card.
+
+    He must continue to take cards until the total is 17 or more, at which point the dealer must stand.
+
+    If the dealer has an ace, and counting it as 11 would bring his total to 17
+    or more (but not over 21), he must count the ace as 11 and stand.
+    The dealer's decisions, then, are automatic on all plays, whereas the player
+    always has the option of taking one or more cards.
+    */
   }
 }
