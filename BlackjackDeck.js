@@ -58,15 +58,18 @@ export default class BlackjackDeck {
 
         console.log(player.handTotals);
         if (player.handTotals.every(value => value > 21)) {
-          document.getElementById('drawButton').disabled = true;
+          document.getElementById('drawButton').disabled = true
+          document.getElementById('standButton').disabled = true;
           this.createGameEndMessage("You lose 😭");
         }
         if (player.handTotals.includes(21)) {
           if (player.isDealer) {
             document.getElementById('drawButton').disabled = true;
+            document.getElementById('standButton').disabled = true;
             this.createGameEndMessage("Dealer wins 😭");
           } else {
             document.getElementById('drawButton').disabled = true;
+            document.getElementById('standButton').disabled = true;
             this.createGameEndMessage("You win! 😄");
           }
         }

@@ -12,8 +12,8 @@ export default class BlackjackPlayer {
 
   reset() {
     this.hand = [];
-    this.bust = false;
     document.getElementById('drawButton').disabled = false;
+    document.getElementById('standButton').disabled = false;
     if(this.isDealer) {
       document.getElementById('dealerHand').innerText = "Dealer's hand: ";
       document.getElementById('dealerTotals').innerText = "Dealer's hand totals: ";
