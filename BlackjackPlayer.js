@@ -4,7 +4,6 @@ export default class BlackjackPlayer {
 
   constructor(isDealer) {
     this.hand = [];
-    this.bust = false;
     this.win = false;
     this.winCount = 0;
     this.isDealer = isDealer;
