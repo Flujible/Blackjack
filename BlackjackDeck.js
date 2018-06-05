@@ -49,11 +49,9 @@ export default class BlackjackDeck {
           }
         });
         if(player.isDealer) {
-          console.log('Dealer');
           document.getElementById('dealerHand').innerText = "Dealer's hand: " + cards;
           document.getElementById('dealerTotals').innerText = "Dealer's hand totals: " + totals;
         } else {
-          console.log('Player');
           document.getElementById('playerHand').innerText = "Your hand: " + cards;
           document.getElementById('playerTotals').innerText = "Your hand totals: " + totals;
         }
