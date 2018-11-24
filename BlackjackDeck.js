@@ -6,14 +6,17 @@ export default class BlackjackDeck {
     this.apiUrl = apiUrl;
   }
 
+  //Shuffle the deck and deal cards
   initialDeal(player, dealer) {
     this.shuffle();
+    //Deal cards alternately to the player and then the dealer
     this.dealCard(player);
     this.dealCard(dealer);
     this.dealCard(player);
     this.dealCard(dealer);
   }
 
+  //Shuffle the deck of cards being used
   shuffle() {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/shuffle/')
       .then(response => response.json())
@@ -26,6 +29,7 @@ export default class BlackjackDeck {
       });
   }
 
+  //Take a card from the deck being used and give it to the specified player
   dealCard(player) {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
@@ -42,6 +46,7 @@ export default class BlackjackDeck {
   updatePlayerData(player) {
     let cards;
     let totals;
+    //Create a string containing each card that the player has in their hand
     player.hand.forEach((card, index) => {
       if (index === 0) {
         cards = card.code;
@@ -49,6 +54,7 @@ export default class BlackjackDeck {
         cards += ', ' + card.code;
       }
     });
+    //Add text to identify which player's hand is being displayed
     if(player.isDealer) {
       document.getElementById('dealerHand').innerText = "Dealer's hand: " + cards;
     } else {
@@ -56,6 +62,9 @@ export default class BlackjackDeck {
     }
 
     //Add totals to the list of totals unless the total is >21
+    //
+    //For each ace the user has in their hand, they have additional potential
+    //hand totals that they can use, so display each of the possibilities
     player.handTotals.forEach((total, index) => {
       if (index === 0) {
         totals = total;
@@ -63,6 +72,7 @@ export default class BlackjackDeck {
         totals += ', ' + total;
       }
     });
+    //Add text to identify which player's hand total is being displayed
     if(player.isDealer) {
       document.getElementById('dealerTotals').innerText = "Dealer's hand totals: " + totals;
     } else {
@@ -70,12 +80,15 @@ export default class BlackjackDeck {
     }
   }
 
+  //Calculate the player's current position in the game
   evaluateHand(player) {
+    //If all their possible hands are above 21, disable buttons and show losing message
     if (player.handTotals.every(value => value > 21)) {
       document.getElementById('drawButton').disabled = true
       document.getElementById('standButton').disabled = true;
       this.createGameEndMessage("You lose 😭");
     }
+    //If any of the player's hands show 21, they automatically win
     if (player.handTotals.includes(21)) {
       if (player.isDealer) {
         document.getElementById('drawButton').disabled = true;

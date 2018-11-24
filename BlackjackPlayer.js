@@ -9,6 +9,7 @@ export default class BlackjackPlayer {
     this.isDealer = isDealer;
   }
 
+  //Re-enable buttons and reset text nodes for the start of a new game
   reset() {
     this.hand = [];
     document.getElementById('drawButton').disabled = false;
@@ -22,11 +23,14 @@ export default class BlackjackPlayer {
     }
   }
 
+  
   get handTotals() {
     let handTotals = [0];
     let duplicateTotals;
     let aces = 0;
 
+    //For each card in the player's hand, convert its face number to a value and
+    //add it to the player's totals
     this.hand.map(card => {
       if (Number.isInteger(parseInt(card.value))) {
         const { value } = card;
