@@ -36,7 +36,7 @@ export default class Game {
      * or more (but not over 21), he must count the ace as 11 and stand.
      * He must continue to take cards until the total is 17 or more, at which point the dealer must stand.
      */
-    async startDealersTurn() {
+    startDealersTurn() {
         this.document.getElementById('drawButton').disabled = true;
         this.document.getElementById('standButton').disabled = true;
         //TODO: Turn over the face down cards
