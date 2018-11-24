@@ -1,35 +1,11 @@
-import BlackjackDeck from './BlackjackDeck.js';
-import BlackjackPlayer from './BlackjackPlayer.js'
+import Game from './Game';
 
 let apiUrl = 'https://deckofcardsapi.com/api/';
-
-let deck = new BlackjackDeck(apiUrl);
-let player = new BlackjackPlayer(false);
-let dealer = new BlackjackPlayer(true);
-
-let status = (response) => {
-  if (response.status <= 200 && response.status < 300) {
-    return Promise.resolve(response);
-  } else {
-    return Promise.reject(new Error(response.statusText));
-  }
-}
-
-let json = (response) => {
-  return response.json();
-}
+let game = new Game(document, apiUrl);
 
 window.onload = () => {
-  deck.initialDeal(player, dealer);
-  document.getElementById('drawButton').onclick = () => deck.dealCard(player);
-  document.getElementById('resetButton').onclick = () => {
-    deck.shuffle();
-    player.reset();
-    dealer.reset();
-    deck.initialDeal(player, dealer);
-    if(document.getElementById('gameEndMessage')) {
-      let message = document.getElementById('gameEndMessage');
-      message.parentNode.removeChild(message);
-    }
-  }
+  game.startGame();
+  document.getElementById('drawButton').onclick = () => game.dealCardToPlayer();
+  document.getElementById('resetButton').onclick = () => game.startGame();
+  document.getElementById('standButton').onclick = () => game.startDealersTurn();
 }
