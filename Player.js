@@ -1,7 +1,4 @@
 export default class Player {
-  // TODO player: stand
-  // TODO dealer: auto-play when player stands
-
   constructor(isDealer) {
     this.hand = [];
     this.win = false;
