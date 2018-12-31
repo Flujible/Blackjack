@@ -69,7 +69,8 @@ export default class Game {
      * @desc Compare the dealer's optimal total to the player's optimal total and declare a winner
      */
     evaluateGameState() {
-        console.log("Dealer's turn finished");
+        console.log(`Dealer's hand: ${this.dealer.handTotals}`);
+        console.log(`Player's hand: ${this.player.handTotals}`);
         
         /**
          * If the player stands and the dealer reaches 17 in card value
