@@ -8,7 +8,6 @@ export default class Deck {
 
   //Shuffle the deck and deal cards
   initialDeal(player, dealer) {
-    this.shuffle();
     //Deal cards alternately to the player and then the dealer
     this.dealCard(player);
     this.dealCard(dealer);
