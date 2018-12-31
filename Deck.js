@@ -59,6 +59,13 @@ export default class Deck {
   updatePlayerData(player) {
     let cards;
     let totals;
+
+    console.log(player.handTotals)
+    //Remove any totals greater than 21
+    for(let i = player.handTotals.length - 1; i <= 0; i--) {
+      player.handTotals[i] > 21 ? player.handTotals.splice(i, 1) : '';
+    }
+
     //Create a string containing each card that the player has in their hand
     player.hand.forEach((card, index) => {
       if (index === 0) {
@@ -81,7 +88,7 @@ export default class Deck {
     player.handTotals.forEach((total, index) => {
       if (index === 0) {
         totals = total;
-      } else if(total <= 21) {
+      } else {
         totals += ', ' + total;
       }
     });
