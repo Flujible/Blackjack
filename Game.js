@@ -10,6 +10,9 @@ export default class Game {
         this.deck = new Deck(this.apiUrl);
     }
 
+    /**
+     * @desc Reset the page and player objects and shuffle the deck 
+     */
     startGame() {
         this.deck.shuffle();
         this.player.reset();
@@ -47,14 +50,23 @@ export default class Game {
         dealerLimitReached ? this.evaluateGameState() : this.deck.dealCard(this.dealer);
     }
 
+    /**
+     * @desc Deal a card from the deck to the player
+     */
     dealCardToPlayer() {
         this.deck.dealCard(this.player);
     }
 
+    /**
+     * @desc Deal a card from the deck to the dealer
+     */
     dealCardToDealer() {
         this.deck.dealCard(this.dealer);
     }
 
+    /**
+     * @desc Compare the dealer's optimal total to the player's optimal total and declare a winner
+     */
     evaluateGameState() {
         console.log("Dealer's turn finished");
         
