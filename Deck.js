@@ -41,6 +41,20 @@ export default class Deck {
         console.log('Request failed', err);
       });
   }
+  
+  dealAce(player) {
+    let ace = {suit: "DIAMONDS", value: "ACE", code: "AD"}
+    fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
+      .then(response => response.json())
+      .then((data) => {
+        player.hand.push(ace);
+        this.updatePlayerData(player);
+        this.evaluateHand(player);
+      })
+      .catch((err) => {
+        console.log('Request failed', err);
+      });
+  }
 
   updatePlayerData(player) {
     let cards;

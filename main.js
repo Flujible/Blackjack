@@ -8,4 +8,5 @@ window.onload = () => {
   document.getElementById('drawButton').onclick = () => game.dealCardToPlayer();
   document.getElementById('resetButton').onclick = () => game.startGame();
   document.getElementById('standButton').onclick = () => game.startDealersTurn();
+  document.getElementById('giveDealerAce').onclick = () => game.giveDealerAce();
 }

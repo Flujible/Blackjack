@@ -64,4 +64,8 @@ export default class Game {
          * Declare the winner
          */
     }
+
+    giveDealerAce() {
+        this.deck.dealAce(this.dealer);
+    }
 }
