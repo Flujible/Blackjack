@@ -84,4 +84,15 @@ export default class Game {
     giveDealerAce() {
         this.deck.dealAce(this.dealer);
     }
+
+    endGame(winner) {
+        let innerText;
+        winner.isDealer ? innerText = "You lose 😭" : innerText = "You win 🎉";
+        let gameEndMessage = document.createElement('div');
+        gameEndMessage.id ='gameEndMessage'
+        let newContent = document.createTextNode(innerText);
+        gameEndMessage.appendChild(newContent);
+        let mainContent = document.getElementById('mainContent');
+        mainContent.append(gameEndMessage);
+    }
 }
