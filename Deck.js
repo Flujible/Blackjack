@@ -2,7 +2,6 @@ export default class Deck {
   constructor(apiUrl) {
     this.deckId = 'new';
     this.cardsRemaining = null;
-    this.lastDrawnCard = null;
     this.apiUrl = apiUrl;
   }
 
@@ -32,7 +31,6 @@ export default class Deck {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
-        this.lastDrawnCard = data.cards[0].code;
         player.hand.push(data.cards[0]);
         this.updatePlayerData(player);
         this.evaluateHand(player);
