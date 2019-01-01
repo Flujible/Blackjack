@@ -32,8 +32,8 @@ export default class Deck {
       .then(response => response.json())
       .then((data) => {
         player.hand.push(data.cards[0]);
-        this.updatePlayerData(player);
-        this.evaluateHand(player);
+        player.updatePlayerData();
+        player.evaluateHand();
       }).catch((err) => {
         console.error('Request failed', err);
       });
@@ -45,8 +45,8 @@ export default class Deck {
       .then(response => response.json())
       .then((data) => {
         player.hand.push(ace);
-        this.updatePlayerData(player);
-        this.evaluateHand(player);
+        player.updatePlayerData(player);
+        player.evaluateHand(player);
       })
       .catch((err) => {
         console.error('Request failed', err);
