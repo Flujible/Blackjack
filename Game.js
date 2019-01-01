@@ -17,8 +17,8 @@ export default class Game {
      */
     startGame() {
         this.deck.shuffle();
-        this.player.reset();
-        this.dealer.reset();
+        this.player = new Player(false);
+        this.dealer = new Dealer(true);
         this.deck.initialDeal(this.player, this.dealer);
         if(this.document.getElementById('gameEndMessage')) {
             let message = this.document.getElementById('gameEndMessage');

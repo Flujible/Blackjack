@@ -5,15 +5,8 @@ export default class Player {
     this.handTotals = [];
     this.totalsString;
     this.win = false;
-    this.winCount = 0;
     this.isDealer = isDealer;
   }
-
-  //Re-enable buttons and reset text nodes for the start of a new game
-  reset() {
-    this.hand = [];
-  }
-
   
   get handTotals() {
     return this.handTotals;
