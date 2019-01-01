@@ -18,8 +18,6 @@ export default class Game {
     //TODO: reset the player state before starting a game
     startGame() {
         this.deck.shuffle();
-        this.player = new Player(false);
-        this.dealer = new Dealer(true);
         this.deck.initialDeal(this.player, this.dealer);
         if(this.document.getElementById('gameEndMessage')) {
             let message = this.document.getElementById('gameEndMessage');
