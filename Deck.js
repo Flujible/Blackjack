@@ -22,7 +22,7 @@ export default class Deck {
         this.deckId = data.deck_id;
         this.cardsRemaining = data.remaining;
       }).catch((err) => {
-        console.err('Request failed', err);
+        console.error('Request failed', err);
       });
   }
 
@@ -35,7 +35,7 @@ export default class Deck {
         this.updatePlayerData(player);
         this.evaluateHand(player);
       }).catch((err) => {
-        console.err('Request failed', err);
+        console.error('Request failed', err);
       });
   }
   
@@ -49,7 +49,7 @@ export default class Deck {
         this.evaluateHand(player);
       })
       .catch((err) => {
-        console.err('Request failed', err);
+        console.error('Request failed', err);
       });
   }
 }
