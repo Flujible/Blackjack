@@ -22,9 +22,8 @@ export default class Deck {
       .then((data) => {
         this.deckId = data.deck_id;
         this.cardsRemaining = data.remaining;
-        console.log(data.deck_id);
       }).catch((err) => {
-        console.log('Request failed', err);
+        console.err('Request failed', err);
       });
   }
 
@@ -38,7 +37,7 @@ export default class Deck {
         this.updatePlayerData(player);
         this.evaluateHand(player);
       }).catch((err) => {
-        console.log('Request failed', err);
+        console.err('Request failed', err);
       });
   }
   
@@ -52,7 +51,7 @@ export default class Deck {
         this.evaluateHand(player);
       })
       .catch((err) => {
-        console.log('Request failed', err);
+        console.err('Request failed', err);
       });
   }
 
