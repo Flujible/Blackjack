@@ -15,6 +15,7 @@ export default class Game {
     /**
      * @desc Reset the page and player objects and shuffle the deck 
      */
+    //TODO: reset the player state before starting a game
     startGame() {
         this.deck.shuffle();
         this.player = new Player(false);

@@ -16,12 +16,16 @@ export default class Player {
    * @desc Updates the player's hand totals, hand string, and totals string
    */
   updatePlayerData() {
+    //TODO: Move to bespoke function
     this.hand.map((card, index) => {
       index === 0 ? this.handString = card.code : this.handString += `, ${card.code}`;
     });
 
     //For each card in the player's hand, convert its face number to a value and
     //add it to the player's totals
+    //TODO: hand totals is returning undefined because nothing is ever being pushed to it
+    // This function is more complex than expected, move to its own function and call from here
+    let duplicateTotals;
     this.hand.map(card => {
       if (parseInt(card.value)) {
         const cardValue = parseInt(card.value);
@@ -37,6 +41,8 @@ export default class Player {
         duplicateTotals = duplicateTotals.map(total => this.handTotals.push(total + 11));
       }
     });
+
+    //TODO: Move to bespoke function
     //Remove any duplicates or values > 21 from the hand totals
     this.handTotals = [...new Set(this.handTotals)]
     for(let i = this.handTotals.length; i === 0; i--) {
@@ -47,6 +53,8 @@ export default class Player {
       index === 0 ? this.totalsString = total : this.totalsString += `, ${total}`;
     });
     
+
+    //TODO: Move to bespoke function
     this.isDealer ? 
       document.getElementById('dealerHand').innerText = "Dealer's hand: " + this.handString : 
       document.getElementById('playerHand').innerText = "Your hand: " + this.handString;
