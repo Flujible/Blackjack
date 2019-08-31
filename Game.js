@@ -1,8 +1,6 @@
 import Deck from "./Deck";
 import Player from "./Player";
 
-//TODO: The game wont run as a lot of changes were made to where functions reside, calls to these functions need to be fixed in order for the game to play
-
 export default class Game {
     constructor(document, apiUrl) {
         this.document = document;
