@@ -2,7 +2,7 @@ export default class Player {
   constructor(isDealer) {
     this.hand = [];
     this.handString;
-    this.handTotals = [];
+    this.handTotals = [0];
     this.totalsString;
     this.win = false;
     this.isDealer = isDealer;
