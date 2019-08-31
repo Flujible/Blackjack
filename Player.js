@@ -33,37 +33,36 @@ export default class Player {
   }
 
   calcHandTotals() {
-    //For each card in the player's hand, convert its face number to a value and
-    //add it to the player's totals
-    let handTotals = [0];
+    let newCards = [];
     let duplicateTotals;
     this.hand.map(card => {
+      if(!card.resolved) {
+        newCards.push(card);
+        card.resolved = true;
+      }
+    });
+    newCards.map(card => {
       if (parseInt(card.value)) {
         const cardValue = parseInt(card.value);
-        handTotals = handTotals.map(total => total + cardValue);
+        this.handTotals = this.handTotals.map(total => total + cardValue);
       } else if (['JACK', 'QUEEN', 'KING'].includes(card.value)){
         //Face cards are always worth 10, add this to hand totals
-        handTotals = handTotals.map(total => total + 10);
+        this.handTotals = this.handTotals.map(total => total + 10);
       } else if (card.value === 'ACE'){
-        // Duplicate the hand totals, add 1 to the original and 11 to the
-        // other, dont add duplicates
-        duplicateTotals = handTotals.slice();
-        handTotals = handTotals.map(total => total + 1);
-        duplicateTotals = duplicateTotals.map(total => handTotals.push(total + 11));
+        // Duplicate the hand totals, add 1 to the original and 11 to the other
+        duplicateTotals = this.handTotals.slice();
+        this.handTotals = this.handTotals.map(total => total + 1);
+        duplicateTotals = duplicateTotals.map(total => this.handTotals.push(total + 11));
       }
     });
 
-    //TODO: This isnt always being run for some reason
-    let cleanHandTotals = [...new Set(handTotals)];
-    for(let i = cleanHandTotals.length -1; i === 0; i--) {
-      console.log(cleanHandTotals[i])
-      if(cleanHandTotals[i] > 21) {
-        console.log("over 21 found: "+cleanHandTotals[i]);
-        cleanHandTotals.splice(i, 1);
-      }
-
+    //Remove any duplicates added above
+    let cleanHandTotals = [...new Set(this.handTotals)];
+    //Check: This isnt always being run for some reason
+    //Remove any totals greater than 21 (unless its the only hand total)
+    for(let i = cleanHandTotals.length - 1; i === 0; i--) {
+      cleanHandTotals[i] > 21 && i > 0 ? cleanHandTotals.splice(i, 1) : null;
     }
-    console.log(`Hand: ${cleanHandTotals}`);
     return cleanHandTotals;
   }
 

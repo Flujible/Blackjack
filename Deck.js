@@ -31,6 +31,8 @@ export default class Deck {
     fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
+        //Add a 'resolved' key to speed up hand calculations 
+        data.cards[0].resolved = false;
         player.hand.push(data.cards[0]);
         player.updatePlayerData();
         player.evaluateHand();
