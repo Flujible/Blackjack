@@ -17,15 +17,17 @@ export default class Player {
     this.handTotals = this.calcHandTotals();
     this.totalsString = this.stringify(this.handTotals);
 
+    this.redraw();
+  }
 
-    //TODO: Move to bespoke function
+  redraw() {
     this.isDealer ?
       document.getElementById('dealerHand').innerText = "Dealer's hand: " + this.handString :
       document.getElementById('playerHand').innerText = "Your hand: " + this.handString;
     this.isDealer ?
       document.getElementById('dealerTotals').innerText = "Dealer's hand totals: " + this.totalsString :
       document.getElementById('playerTotals').innerText = "Your hand totals: " + this.totalsString;
-  }
+  } 
 
   evaluateHand() {
     return this.handTotals.every(value => value > 21 ? -1 :
