@@ -5,16 +5,15 @@ export default class Game {
     constructor(document, apiUrl) {
         this.document = document;
         this.apiUrl = apiUrl;
-        this.player = new Player(false);
-        this.dealer = new Player(true);
         this.deck = new Deck(this.apiUrl);
     }
 
     /**
      * @desc Reset the page and player objects and shuffle the deck 
      */
-    //TODO: reset the player state before starting a game
     startGame() {
+        this.player = new Player(false);
+        this.dealer = new Player(true);
         this.deck.shuffle();
         this.deck.initialDeal(this.player, this.dealer);
         if(this.document.getElementById('gameEndMessage')) {
