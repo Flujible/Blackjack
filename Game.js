@@ -38,7 +38,6 @@ export default class Game {
      * He must continue to take cards until the total is 17 or more, at which point the dealer must stand.
      */
     //TODO: The dealer must draw cards in a loop until their limit of 17 has been reached instead of drawing a single card
-    //TODO: The dealer's second card should be face down until their turn begins
     startDealersTurn() {
         this.document.getElementById('drawButton').disabled = true;
         this.document.getElementById('standButton').disabled = true;
