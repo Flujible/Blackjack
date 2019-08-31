@@ -76,4 +76,12 @@ export default class Player {
     })
     return string;
   }
+
+  dealerStand() {
+    let dealerLimitReached = false;
+    this.handTotals.map(handTotal => {
+      handTotal >= 17 ? dealerLimitReached = true : ''
+    });
+    return dealerLimitReached;
+  }
 }

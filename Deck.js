@@ -28,7 +28,7 @@ export default class Deck {
 
   //Take a card from the deck being used and give it to the specified player
   dealCard(player) {
-    fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
+    return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
         //Add a 'resolved' key to speed up hand calculations 

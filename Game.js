@@ -41,11 +41,18 @@ export default class Game {
     startDealersTurn() {
         this.document.getElementById('drawButton').disabled = true;
         this.document.getElementById('standButton').disabled = true;
-        let dealerLimitReached = false;
-        this.dealer.handTotals.map(handTotal => {
-            handTotal >= 17 ? dealerLimitReached = true : ''
-        })
-        dealerLimitReached ? this.evaluateGameState() : this.deck.dealCard(this.dealer);
+        this.dealersDraw();
+    }
+
+    dealersDraw() {
+        if(!this.dealer.dealerStand()) {
+            this.dealCardToDealer()
+                .then(() => {
+                    this.dealersDraw();
+                });
+        } else {
+            console.log(":: Dealer's turn finished")
+        }
     }
 
     /**
@@ -59,7 +66,7 @@ export default class Game {
      * @desc Deal a card from the deck to the dealer
      */
     dealCardToDealer() {
-        this.deck.dealCard(this.dealer);
+        return this.deck.dealCard(this.dealer);
     }
 
     /**
