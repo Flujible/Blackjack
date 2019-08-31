@@ -51,7 +51,7 @@ export default class Game {
                     this.dealersDraw();
                 });
         } else {
-            console.log(":: Dealer's turn finished")
+            this.evaluateGameState();
         }
     }
 
@@ -59,7 +59,10 @@ export default class Game {
      * @desc Deal a card from the deck to the player
      */
     dealCardToPlayer() {
-        this.deck.dealCard(this.player);
+        this.deck.dealCard(this.player)
+            .then(() => {
+                this.evaluateGameState();
+            });
     }
 
     /**
@@ -73,6 +76,28 @@ export default class Game {
      * @desc Compare the dealer's optimal total to the player's optimal total and declare a winner
      */
     evaluateGameState() {
+        gameEnded = false;
+        this.player.handTotals.map(total => {
+            if(total === 21) {
+                this.endGame(this.player);
+                gameEnded = true;
+            } else if(total > 21 && !gameEnded) {
+                this.endGame(this.dealer);
+                gameEnded = true;
+            }
+        });
+
+        if(!gameEnded) {
+            this.dealer.handTotals.map(total => {
+                if(total === 21) {
+                    this.endGame(this.dealer);
+                    gameEnded = true;
+                } else if(total > 21) {
+                    this.endGame(this.player);
+                    gameEnded = true;
+                }
+            });
+        }
         console.log(`Dealer's hand: ${this.dealer.handTotals}`);
         console.log(`Player's hand: ${this.player.handTotals}`);
         
@@ -88,6 +113,8 @@ export default class Game {
     }
 
     endGame(winner) {
+        this.document.getElementById("drawButton").disabled = true;
+        this.document.getElementById("standButton").disabled = true;
         let innerText;
         winner.isDealer ? innerText = "You lose 😭" : innerText = "You win 🎉";
         let gameEndMessage = document.createElement('div');
