@@ -43,6 +43,7 @@ export default class Game {
      */
     //TODO: The dealer must draw cards in a loop until their limit of 17 has been reached instead of drawing a single card
     startDealersTurn() {
+        this.player.stand = true;
         this.document.getElementById('drawButton').disabled = true;
         this.document.getElementById('standButton').disabled = true;
         this.dealersDraw();

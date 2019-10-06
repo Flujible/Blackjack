@@ -6,6 +6,15 @@ export default class Player {
     this.totalsString;
     this.win = false;
     this.isDealer = isDealer;
+    this.stand = false;
+  }
+
+  get largestTotal() {
+    let largest = 0;
+    this.handTotals.map((total) => {
+      total > largest ? largest = total : null;
+    });
+    return largest;
   }
 
   /**
@@ -27,7 +36,7 @@ export default class Player {
     this.isDealer ?
       document.getElementById('dealerTotals').innerText = "Dealer's hand totals: " + this.totalsString :
       document.getElementById('playerTotals').innerText = "Your hand totals: " + this.totalsString;
-  } 
+  }
 
   evaluateHand() {
     return this.handTotals.every(value => value > 21 ? -1 :
@@ -80,8 +89,8 @@ export default class Player {
   dealerStand() {
     let dealerLimitReached = false;
     this.handTotals.map(handTotal => {
-      handTotal >= 17 ? dealerLimitReached = true : ''
+      handTotal >= 17 ? this.stand = true : ''
     });
-    return dealerLimitReached;
+    return this.stand;
   }
 }
