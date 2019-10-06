@@ -7,11 +7,14 @@ export default class Deck {
 
   //Shuffle the deck and deal cards
   initialDeal(player, dealer) {
+    const deals = [];
     //Deal cards alternately to the player and then the dealer
-    this.dealCard(player);
-    this.dealCard(dealer);
-    this.dealCard(player);
-    this.dealCard(dealer);
+    deals.push(this.dealCard(player));
+    deals.push(this.dealCard(dealer, true));
+    deals.push(this.dealCard(player));
+    deals.push(this.dealCard(dealer));
+
+    return Promise.all(deals)
   }
 
   //Shuffle the deck of cards being used
