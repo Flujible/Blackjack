@@ -6,12 +6,14 @@ export default class Game {
         this.document = document;
         this.apiUrl = apiUrl;
         this.deck = new Deck(this.apiUrl);
+        this.gameEnded = false;
     }
 
     /**
-     * @desc Reset the page and player objects and shuffle the deck 
+     * @desc Reset the page and player objects and shuffle the deck
      */
     startGame() {
+        this.gameEnded = false;
         this.player = new Player(false);
         this.dealer = new Player(true);
         this.deck.shuffle();
