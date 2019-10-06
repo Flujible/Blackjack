@@ -123,10 +123,6 @@ export default class Game {
         }
     }
 
-    giveDealerAce(player) {
-        this.deck.dealAce(player);
-    }
-
     endGame(winner) {
         this.document.getElementById("drawButton").disabled = true;
         this.document.getElementById("standButton").disabled = true;
