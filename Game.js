@@ -73,55 +73,61 @@ export default class Game {
     /**
      * @desc Deal a card from the deck to the dealer
      */
-    dealCardToDealer() {
-        return this.deck.dealCard(this.dealer);
+    dealCardToDealer(faceDown) {
+        return this.deck.dealCard(this.dealer, faceDown);
     }
 
     /**
      * @desc Compare the dealer's optimal total to the player's optimal total and declare a winner
      */
     evaluateGameState() {
-        gameEnded = false;
         this.player.handTotals.map(total => {
             if(total === 21) {
                 this.endGame(this.player);
-                gameEnded = true;
-            } else if(total > 21 && !gameEnded) {
+                this.gameEnded = true;
+            } else if(total > 21 && !this.gameEnded) {
                 this.endGame(this.dealer);
-                gameEnded = true;
+                this.gameEnded = true;
             }
         });
 
-        if(!gameEnded) {
+        if(!this.gameEnded) {
             this.dealer.handTotals.map(total => {
                 if(total === 21) {
                     this.endGame(this.dealer);
-                    gameEnded = true;
+                    this.gameEnded = true;
                 } else if(total > 21) {
                     this.endGame(this.player);
-                    gameEnded = true;
+                    this.gameEnded = true;
                 }
             });
         }
-        console.log(`Dealer's hand: ${this.dealer.handTotals}`);
-        console.log(`Player's hand: ${this.player.handTotals}`);
-        
-        /**
-         * If the player stands and the dealer reaches 17 in card value
-         * compare hand totals to see who is closest to 21
-         * Declare the winner
-         */
+
+        if(!this.gameEnded && this.dealer.stand && this.player.stand) {
+            if(this.player.largestTotal === this.dealer.largestTotal) {
+                this.endGame();
+            } else if(this.player.largestTotal > this.dealer.largestTotal) {
+                this.endGame(this.player);
+            } else {
+                this.endGame(this.dealer)
+            }
+
+        }
     }
 
-    giveDealerAce() {
-        this.deck.dealAce(this.dealer);
+    giveDealerAce(player) {
+        this.deck.dealAce(player);
     }
 
     endGame(winner) {
         this.document.getElementById("drawButton").disabled = true;
         this.document.getElementById("standButton").disabled = true;
         let innerText;
-        winner.isDealer ? innerText = "You lose 😭" : innerText = "You win 🎉";
+        if(winner) {
+            winner.isDealer ? innerText = "You lose 😭" : innerText = "You win 🎉";
+        } else {
+            innerText = "Its a draw 😱"
+        }
         let gameEndMessage = document.createElement('div');
         gameEndMessage.id ='gameEndMessage'
         let newContent = document.createTextNode(innerText);
