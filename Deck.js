@@ -30,12 +30,14 @@ export default class Deck {
   }
 
   //Take a card from the deck being used and give it to the specified player
-  dealCard(player) {
+  dealCard(player, faceDown) {
     return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
-        //Add a 'resolved' key to speed up hand calculations 
+        // Add a 'resolved' key to speed up hand calculations
         data.cards[0].resolved = false;
+        // Add a 'faceDown' key to determine how to display the card
+        faceDown ? data.cards[0].faceDown = true : null;
         player.hand.push(data.cards[0]);
         player.updatePlayerData();
         player.evaluateHand();
