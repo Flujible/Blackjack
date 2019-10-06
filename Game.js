@@ -13,6 +13,14 @@ export default class Game {
      * @desc Reset the page and player objects and shuffle the deck
      */
     startGame() {
+        const dealerCardArea = this.document.getElementById('dealerArea');
+        const playerCardArea = this.document.getElementById('playerArea');
+        while (dealerCardArea.firstChild) {
+            dealerCardArea.removeChild(dealerCardArea.firstChild);
+        }
+        while (playerCardArea.firstChild) {
+            playerCardArea.removeChild(playerCardArea.firstChild);
+        }
         this.gameEnded = false;
         this.player = new Player(false);
         this.dealer = new Player(true);

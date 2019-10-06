@@ -3,6 +3,7 @@ export default class Deck {
     this.deckId = 'new';
     this.cardsRemaining = null;
     this.apiUrl = apiUrl;
+    this.imgBase = "https://deckofcardsapi.com/static/img/"
   }
 
   //Shuffle the deck and deal cards
@@ -31,6 +32,8 @@ export default class Deck {
 
   //Take a card from the deck being used and give it to the specified player
   dealCard(player, faceDown) {
+    const imgTag = document.createElement('img');
+    const cardArea = document.getElementById(player.isDealer ? 'dealerArea' : 'playerArea');
     return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
@@ -39,6 +42,10 @@ export default class Deck {
         // Add a 'faceDown' key to determine how to display the card
         faceDown ? data.cards[0].faceDown = true : null;
         player.hand.push(data.cards[0]);
+        imgTag.src = `${this.imgBase}${data.cards[0].code}.png`;
+        imgTag.classList.add("card");
+        faceDown ? imgTag.classList.add("facedown") : null;
+        cardArea.appendChild(imgTag);
         player.updatePlayerData();
         player.evaluateHand();
       }).catch((err) => {
