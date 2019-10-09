@@ -32,9 +32,6 @@ export default class Game {
             let message = this.document.getElementById('gameEndMessage');
             message.parentNode.removeChild(message);
         }
-        this.document.getElementById('dealerHand').innerText = "Dealer's hand: ";
-        this.document.getElementById('dealerTotals').innerText = "Dealer's hand total(s): ";
-        this.document.getElementById('playerHand').innerText = "Your hand: ";
         this.document.getElementById('playerTotals').innerText = "Your hand total(s): ";
         this.document.getElementById('drawButton').disabled = false;
         this.document.getElementById('standButton').disabled = false;
