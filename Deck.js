@@ -37,6 +37,7 @@ export default class Deck {
     return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
+        const randomNo = Math.floor(Math.random() * 4) - 2;
         // Add a 'resolved' key to speed up hand calculations
         data.cards[0].resolved = false;
         // Add a 'faceDown' key to determine how to display the card
@@ -44,6 +45,8 @@ export default class Deck {
         player.hand.push(data.cards[0]);
         imgTag.src = `${this.imgBase}${data.cards[0].code}.png`;
         imgTag.classList.add("card");
+        imgTag.style.transform = `rotate(${randomNo}deg)`
+        console.log()
         faceDown ? imgTag.classList.add("facedown") : null;
         cardArea.appendChild(imgTag);
         player.updatePlayerData();
