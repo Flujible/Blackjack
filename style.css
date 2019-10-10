@@ -9,6 +9,12 @@ body {
   margin: 0;
 }
 
+p {
+  margin: 0;
+}
+
+/* Look into 3d card flip animations for flipping the dealer's card*/
+/* Look into transitions for animating the cards in */
 .card {
   padding: 2.5px 4px;
   width: 175px;

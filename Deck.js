@@ -6,6 +6,14 @@ export default class Deck {
     this.imgBase = "https://deckofcardsapi.com/static/img/"
   }
 
+  /**
+   * TODO: aria-live polite will announce whenever something changes
+   * Adding alt tags to the images and aria live to the card area MAY cause screen readers
+   * to announce the new card
+   * Otherwise, add a srt div with the hand values in and aria live and it should
+   * get announced
+   */
+
   //Shuffle the deck and deal cards
   initialDeal(player, dealer) {
     const deals = [];
