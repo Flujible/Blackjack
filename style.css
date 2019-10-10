@@ -22,15 +22,28 @@ p {
 }
 
 .cardArea {
+  position: relative;
   height: 250px;
 }
 
-.whiteBox {
+.cardArea:after {
+  top: 0;
+  left: calc(50% - 90px);
   position: absolute;
   width: 180px;
   height: 250px;
   border: solid white 3px;
   border-radius: 5px;
+  content: '';
+  z-index: -1;
+}
+
+.hidden {
+  display: none;
+}
+
+.msg {
+  padding-bottom: 50px;
 }
 
 #mainContent {
