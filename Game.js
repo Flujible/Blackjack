@@ -13,6 +13,14 @@ export default class Game {
      * @desc Reset the page and player objects and shuffle the deck
      */
     startGame() {
+        const endMsgContainer = document.getElementById('endMsgContainer');
+        if (!endMsgContainer.classList.contains('hidden')) {
+            endMsgContainer.classList.add('hidden');
+        };
+        const gameEndMessage = document.getElementById('gameEndMessage');
+        if(gameEndMessage.firstElementChild.tagName === 'P') {
+            gameEndMessage.firstElementChild.remove();
+        }
         const dealerCardArea = this.document.getElementById('dealerArea');
         const playerCardArea = this.document.getElementById('playerArea');
         while (dealerCardArea.firstChild) {
@@ -28,10 +36,6 @@ export default class Game {
         this.deck.initialDeal(this.player, this.dealer).then(() => {
             this.evaluateGameState();
         });
-        if(this.document.getElementById('gameEndMessage')) {
-            let message = this.document.getElementById('gameEndMessage');
-            message.parentNode.removeChild(message);
-        }
         this.document.getElementById('playerTotals').innerText = "Your hand total(s): ";
         this.document.getElementById('drawButton').disabled = false;
         this.document.getElementById('standButton').disabled = false;
@@ -129,11 +133,13 @@ export default class Game {
         } else {
             innerText = "Its a draw 😱"
         }
-        let gameEndMessage = document.createElement('div');
-        gameEndMessage.id ='gameEndMessage'
+        let gameEndDiv = document.getElementById('gameEndMessage');
+        const endMsgContainer = document.getElementById('endMsgContainer');
         let newContent = document.createTextNode(innerText);
-        gameEndMessage.appendChild(newContent);
-        let mainContent = document.getElementById('mainContent');
-        mainContent.append(gameEndMessage);
+        const msg = document.createElement('p');
+        msg.classList.add('msg');
+        msg.appendChild(newContent);
+        gameEndDiv.insertBefore(msg, document.getElementById('resetButton'))
+        endMsgContainer.classList.remove('hidden');
     }
 }
