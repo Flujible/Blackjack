@@ -40,8 +40,12 @@ export default class Deck {
 
   //Take a card from the deck being used and give it to the specified player
   dealCard(player, faceDown) {
+    const imgContainer = document.createElement('div');
     const imgTag = document.createElement('img');
     const cardArea = document.getElementById(player.isDealer ? 'dealerArea' : 'playerArea');
+
+    imgContainer.classList.add('cardFace');
+    imgContainer.classList.add(faceDown ? 'cardFace--back' : 'cardFace--front')
     return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
@@ -52,11 +56,40 @@ export default class Deck {
         faceDown ? data.cards[0].faceDown = true : null;
         player.hand.push(data.cards[0]);
         imgTag.src = `${this.imgBase}${data.cards[0].code}.png`;
+        imgContainer.style.transform = `rotate(${randomNo}deg)`
         imgTag.classList.add("card");
-        imgTag.style.transform = `rotate(${randomNo}deg)`
-        console.log()
         faceDown ? imgTag.classList.add("facedown") : null;
-        cardArea.appendChild(imgTag);
+        
+        
+
+        if(faceDown) {
+          const sceneDiv = document.createElement('div');
+          const cardDiv = document.createElement('div');
+          const frontDiv = document.createElement('div');
+          const backDiv = document.createElement('div');
+
+          sceneDiv.classList.add('scene');
+
+          cardDiv.classList.add('cardFlip');
+          cardDiv.id = "cardFlip";
+          backDiv.classList.add('cardFlipFace');
+          backDiv.classList.add('cardFace--back');
+          frontDiv.classList.add('cardFace');
+          frontDiv.classList.add('cardFace--front');
+
+          sceneDiv.appendChild(cardDiv);
+          frontDiv.appendChild(imgTag);
+          cardDiv.appendChild(backDiv);
+          cardDiv.appendChild(frontDiv);
+          cardArea.appendChild(sceneDiv);
+
+
+
+        } else {
+          imgContainer.appendChild(imgTag);        
+          cardArea.appendChild(imgContainer);
+        }
+
         player.updatePlayerData();
         player.evaluateHand();
       }).catch((err) => {

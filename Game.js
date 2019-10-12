@@ -52,6 +52,7 @@ export default class Game {
      */
     //TODO: The dealer must draw cards in a loop until their limit of 17 has been reached instead of drawing a single card
     startDealersTurn() {
+        document.getElementById('cardFlip').classList.add('isFlipped');
         this.player.stand = true;
         this.document.getElementById('drawButton').disabled = true;
         this.document.getElementById('standButton').disabled = true;
@@ -125,6 +126,8 @@ export default class Game {
     }
 
     endGame(winner) {
+        const faceDownCard = document.getElementById('cardFlip')
+        !faceDownCard.classList.contains('isFlipped') ? faceDownCard.classList.add('isFlipped') : null;
         this.document.getElementById("drawButton").disabled = true;
         this.document.getElementById("standButton").disabled = true;
         let innerText;
