@@ -45,7 +45,7 @@ export default class Deck {
     const cardArea = document.getElementById(player.isDealer ? 'dealerArea' : 'playerArea');
 
     imgContainer.classList.add('cardFace');
-    imgContainer.classList.add(faceDown ? 'cardFace--back' : 'cardFace--front')
+    imgContainer.classList.add(faceDown ? 'cardFace--back' : 'cardFace--front');
     return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
@@ -82,14 +82,11 @@ export default class Deck {
           cardDiv.appendChild(backDiv);
           cardDiv.appendChild(frontDiv);
           cardArea.appendChild(sceneDiv);
-
-
-
         } else {
           imgContainer.appendChild(imgTag);        
           cardArea.appendChild(imgContainer);
         }
-
+        
         player.updatePlayerData();
         player.evaluateHand();
       }).catch((err) => {
