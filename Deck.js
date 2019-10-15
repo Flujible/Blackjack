@@ -49,26 +49,28 @@ export default class Deck {
     return fetch(this.apiUrl + 'deck/' + this.deckId + '/draw/?count=1')
       .then(response => response.json())
       .then((data) => {
-        const randomNo = Math.floor(Math.random() * 4) - 2;
+        let randomNo = Math.floor(Math.random() * 4) - 2;
         // Add a 'resolved' key to speed up hand calculations
         data.cards[0].resolved = false;
         // Add a 'faceDown' key to determine how to display the card
         faceDown ? data.cards[0].faceDown = true : null;
         player.hand.push(data.cards[0]);
         imgTag.src = `${this.imgBase}${data.cards[0].code}.png`;
-        imgContainer.style.transform = `rotate(${randomNo}deg)`
+        imgContainer.style.transform = `translateY(${player.isDealer ? '-' : '+'}50vh) 
+                                        rotate(${randomNo}deg)`;
         imgTag.classList.add("card");
         faceDown ? imgTag.classList.add("facedown") : null;
         
         
 
+        const sceneDiv = document.createElement('div');
         if(faceDown) {
-          const sceneDiv = document.createElement('div');
           const cardDiv = document.createElement('div');
           const frontDiv = document.createElement('div');
           const backDiv = document.createElement('div');
 
           sceneDiv.classList.add('scene');
+          sceneDiv.style.transform = `translateY(-50vh) rotate(${randomNo}deg)`;
 
           cardDiv.classList.add('cardFlip');
           cardDiv.id = "cardFlip";
@@ -83,12 +85,17 @@ export default class Deck {
           cardDiv.appendChild(frontDiv);
           cardArea.appendChild(sceneDiv);
         } else {
-          imgContainer.appendChild(imgTag);        
+          imgContainer.appendChild(imgTag);
           cardArea.appendChild(imgContainer);
         }
         
         player.updatePlayerData();
         player.evaluateHand();
+        setTimeout(() => {
+          sceneDiv.style.transform = `rotate(${randomNo}deg)`;
+          randomNo = Math.floor(Math.random() * 4) - 2;
+          imgContainer.style.transform = `rotate(${randomNo}deg)`;
+        }, 100);
       }).catch((err) => {
         console.error('Request failed', err);
       });
