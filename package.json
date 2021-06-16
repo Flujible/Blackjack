@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/Flujible/Blackjack#readme",
   "dependencies": {
-    "npm": "^6.11.2",
+    "npm": "^6.14.6",
     "parcel-bundler": "^1.12.4"
   }
 }
